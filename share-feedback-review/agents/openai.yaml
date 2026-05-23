@@ -1,0 +1,5 @@
+interface:
+  display_name: "分享复盘点评"
+  short_description: "生成更完整的分享复盘亮点问题和行动建议"
+  default_prompt: "Use $share-feedback-review to 根据这场分享转写，写一份给同学看的复盘点评。"
+

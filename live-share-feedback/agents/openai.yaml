@@ -1,0 +1,5 @@
+interface:
+  display_name: "现场口播点评"
+  short_description: "生成主持人现场可说的简短分享反馈话术"
+  default_prompt: "Use $live-share-feedback to 根据这场分享内容，写一句主持人现场可以说的点评。"
+
