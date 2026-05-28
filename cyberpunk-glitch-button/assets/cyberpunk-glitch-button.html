@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cyberpunk Glitch Button</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --stage-bg: #07080c;
+      --stage-grid: rgba(255, 255, 255, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      background:
+        linear-gradient(var(--stage-grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--stage-grid) 1px, transparent 1px),
+        var(--stage-bg);
+      background-size: 44px 44px;
+      color: #f6f2df;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    .demo-stack {
+      width: min(92vw, 720px);
+      display: grid;
+      gap: 28px;
+      justify-items: center;
+    }
+
+    .cbg-button {
+      --cbg-bg: #f8ef00;
+      --cbg-ink: #08080c;
+      --cbg-edge: #00eaff;
+      --cbg-hot: #ff2f5f;
+      --cbg-edge-size: 4px;
+      --cbg-pad-x: clamp(28px, 5vw, 54px);
+      --cbg-pad-y: 18px;
+      --cbg-cut: polygon(0 0, 100% 0, 100% 100%, 93% 100%, 93% 86%, 84% 86%, 84% 100%, 9% 100%, 0 70%);
+      position: relative;
+      isolation: isolate;
+      min-inline-size: min(100%, 280px);
+      min-block-size: 66px;
+      padding: var(--cbg-pad-y) var(--cbg-pad-x);
+      border: 0;
+      background: transparent;
+      color: var(--cbg-ink);
+      cursor: pointer;
+      font: 900 clamp(1rem, 3vw, 1.35rem) / 1.05 ui-sans-serif, system-ui, sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+
+    .cbg-button::before,
+    .cbg-button::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      clip-path: var(--cbg-cut);
+      z-index: -1;
+    }
+
+    .cbg-button::before {
+      background: var(--cbg-edge);
+      transform: translate(var(--cbg-edge-size), var(--cbg-edge-size));
+    }
+
+    .cbg-button::after {
+      background: var(--cbg-bg);
+    }
+
+    .cbg-button__label,
+    .cbg-button__tag {
+      position: relative;
+      z-index: 1;
+    }
+
+    .cbg-button__tag {
+      position: absolute;
+      right: 7%;
+      bottom: -0.45em;
+      color: var(--cbg-ink);
+      font-size: 0.58rem;
+      line-height: 1;
+    }
+
+    .cbg-button__glitch {
+      position: absolute;
+      inset: calc(var(--cbg-edge-size) * -1);
+      z-index: 2;
+      display: grid;
+      place-items: center;
+      padding: var(--cbg-pad-y) var(--cbg-pad-x);
+      clip-path: var(--cbg-cut);
+      background: var(--cbg-edge);
+      color: var(--cbg-ink);
+      opacity: 0;
+      pointer-events: none;
+      text-shadow: 2px 0 var(--cbg-hot), -2px 0 var(--cbg-edge);
+      transform: translate3d(0, 0, 0);
+    }
+
+    .cbg-button__glitch::before {
+      content: "";
+      position: absolute;
+      inset: var(--cbg-edge-size);
+      z-index: -1;
+      clip-path: var(--cbg-cut);
+      background: var(--cbg-bg);
+    }
+
+    .cbg-button:hover .cbg-button__glitch,
+    .cbg-button:focus-visible .cbg-button__glitch {
+      opacity: 1;
+      animation: cbg-glitch 720ms steps(2, end) both;
+    }
+
+    .cbg-button:focus-visible {
+      outline: 3px solid #ffffff;
+      outline-offset: 7px;
+    }
+
+    .cbg-button:active {
+      transform: translate(1px, 1px);
+    }
+
+    .cbg-button--cyan {
+      --cbg-bg: #00eaff;
+      --cbg-edge: #f8ef00;
+      --cbg-hot: #ff2f5f;
+    }
+
+    @keyframes cbg-glitch {
+      0% {
+        clip-path: polygon(0 4%, 100% 4%, 100% 18%, 0 18%);
+        transform: translate3d(-5px, 0, 0);
+      }
+
+      16% {
+        clip-path: polygon(0 62%, 100% 62%, 100% 78%, 0 78%);
+        transform: translate3d(5px, -1px, 0);
+      }
+
+      32% {
+        clip-path: polygon(0 34%, 100% 34%, 100% 48%, 0 48%);
+        transform: translate3d(-3px, 2px, 0);
+      }
+
+      48% {
+        clip-path: polygon(0 82%, 100% 82%, 100% 100%, 0 100%);
+        transform: translate3d(4px, 1px, 0);
+      }
+
+      64% {
+        clip-path: polygon(0 10%, 100% 10%, 100% 12%, 0 12%);
+        transform: translate3d(-2px, -2px, 0);
+      }
+
+      80% {
+        clip-path: polygon(0 46%, 100% 46%, 100% 58%, 0 58%);
+        transform: translate3d(3px, 0, 0);
+      }
+
+      100% {
+        clip-path: var(--cbg-cut);
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .cbg-button,
+      .cbg-button__glitch {
+        transition: none;
+        animation: none !important;
+      }
+
+      .cbg-button:hover .cbg-button__glitch,
+      .cbg-button:focus-visible .cbg-button__glitch {
+        opacity: 0;
+      }
+
+      .cbg-button:hover::before,
+      .cbg-button:focus-visible::before {
+        transform: translate(calc(var(--cbg-edge-size) * 1.8), var(--cbg-edge-size));
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="demo-stack" aria-label="Cyberpunk glitch button examples">
+    <button class="cbg-button" type="button">
+      <span class="cbg-button__label">Start Mission</span>
+      <span class="cbg-button__glitch" aria-hidden="true">Start Mission</span>
+      <span class="cbg-button__tag" aria-hidden="true">R25</span>
+    </button>
+
+    <button class="cbg-button cbg-button--cyan" type="button">
+      <span class="cbg-button__label">Open Archive</span>
+      <span class="cbg-button__glitch" aria-hidden="true">Open Archive</span>
+      <span class="cbg-button__tag" aria-hidden="true">K09</span>
+    </button>
+  </main>
+</body>
+</html>
