@@ -1,0 +1,4 @@
+interface:
+  display_name: "Cyberpunk Glitch Button"
+  short_description: "Build accessible CSS cyberpunk-style glitch buttons."
+  default_prompt: "Create a polished cyberpunk-style glitch button for this HTML page."
