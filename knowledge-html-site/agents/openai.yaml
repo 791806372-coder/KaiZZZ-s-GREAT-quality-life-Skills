@@ -1,0 +1,4 @@
+interface:
+  display_name: "Knowledge HTML Site"
+  short_description: "Build polished source-grounded knowledge HTML sites."
+  default_prompt: "Use $knowledge-html-site to turn a knowledge topic and source packet into a polished multi-page HTML reference site."
