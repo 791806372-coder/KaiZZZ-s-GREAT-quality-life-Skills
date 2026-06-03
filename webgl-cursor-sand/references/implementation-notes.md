@@ -4,27 +4,28 @@
 
 - CSS: `.cursor-sand` is a fixed full-screen canvas layer with `pointer-events: none`.
 - HTML: place one `<canvas class="cursor-sand" id="cursorSand" aria-hidden="true"></canvas>` near the start of `<body>`.
-- JavaScript: `startCursor()` creates WebGL framebuffers, shader programs, pointer splats, and a render loop.
+- JavaScript: `startCursorSand()` creates a compact WebGL shader, stores recent pointer splats, and redraws a grainy ink field each frame.
 
 ## Layering
 
-- Keep the canvas above normal content and below modals, command palettes, dropdowns, and debug overlays.
+- The starter template puts the canvas behind content and above the page background. Raise it above content only when the design intentionally wants cursor ink to tint text or controls.
 - If a page also has a hero spotlight cursor, keep that effect separate. The spotlight should own text switching; `cursor-sand` should own the global pointer trail.
 - On dark pages, reduce opacity or change `mix-blend-mode` from `multiply` to `screen`, `soft-light`, or normal alpha blending.
 
 ## Performance
 
 - The template already avoids coarse-pointer devices and `prefers-reduced-motion: reduce`.
-- Lower `dyeResolution` first if the page stutters.
-- Lower `simResolution`, `curl`, or `pressureIterations` only after checking that the visual feel is still acceptable.
+- Lower `maxSplats` first if the page stutters.
+- Reduce `window.devicePixelRatio` clamping from `2` to `1.5` or `1` on heavy pages.
+- Reduce splat radius growth if the effect becomes too cloudy.
 - Avoid initializing more than one cursor canvas per page.
 
 ## React Or Vite
 
 - Put the canvas in the top-level layout component.
-- Wrap `startCursor()` in an effect that runs once on mount.
+- Wrap `startCursorSand()` in an effect that runs once on mount.
 - Add cleanup if the component can unmount: remove the pointer listener and cancel the animation frame.
-- Keep the shader code out of render logic. Store it in a helper module or a static asset.
+- Keep the shader strings and `startCursorSand()` helper outside render logic. Store them in a helper module or a static asset.
 
 ## Common Fixes
 
