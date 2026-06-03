@@ -1,0 +1,4 @@
+interface:
+  display_name: "WebGL Cursor Sand"
+  short_description: "Add a polished WebGL sand cursor overlay."
+  default_prompt: "Use $webgl-cursor-sand to add a polished WebGL cursor-sand mouse effect to this HTML page."
