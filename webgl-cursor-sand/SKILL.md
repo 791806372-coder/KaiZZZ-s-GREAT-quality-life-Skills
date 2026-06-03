@@ -9,7 +9,7 @@ description: Add, adapt, or repair a polished WebGL cursor-sand mouse trail effe
 
 Add a subtle full-screen WebGL cursor trail that feels like sand, ink, or smoke following the pointer. Keep the effect decorative, non-blocking, and safe to remove.
 
-Use original project code from `assets/cursor-sand-template.html` as the starter implementation.
+Use `assets/cursor-sand-template.html` as the starter implementation. It is a compact WebGL splat shader version of the sand/ink cursor effect, built to be easy to copy into HTML pages and adapt safely.
 
 ## Workflow
 
@@ -17,10 +17,10 @@ Use original project code from `assets/cursor-sand-template.html` as the starter
 2. Copy the three required pieces from `assets/cursor-sand-template.html`:
    - `.cursor-sand` CSS and its media queries.
    - `<canvas class="cursor-sand" id="cursorSand" aria-hidden="true"></canvas>` near the start of `<body>`.
-   - The script block from `const cursorSand = ...` through `startCursor();`.
+   - The script block from `const cursorSand = ...` through `startCursorSand();`.
 3. Remove older competing cursor layers such as `cursor-glow`, `data-glow`, or duplicate pointer listeners unless the user explicitly wants both.
 4. Tune the integration:
-   - Set `z-index` below modals and critical overlays, but above normal page content.
+   - Default to placing the canvas behind content but above the page background. Raise `z-index` only when the user wants the ink to tint text or controls.
    - Keep `pointer-events: none` on the canvas.
    - Define `--ease` or replace `var(--ease)` with a concrete easing.
    - Adjust `opacity` and `mix-blend-mode` to match the page background.
